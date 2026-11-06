@@ -25,6 +25,7 @@ export default function WeddingVideoPlayer({ onAudioStateChange, onPlaybackEnded
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
   const [hasError, setHasError] = useState(false)
+  const [touchControlsVisible, setTouchControlsVisible] = useState(false)
   const reduceMotion = useReducedMotion()
   const videoAsset = invitationAssets.loveStoryVideo
 
@@ -154,11 +155,24 @@ export default function WeddingVideoPlayer({ onAudioStateChange, onPlaybackEnded
     video.load()
   }
 
+  function handlePointerDown(event) {
+    if (event.pointerType !== 'touch') return
+
+    const isControl = event.target.closest(
+      'button, input, .wedding-video-player__controls',
+    )
+    setTouchControlsVisible((visible) => (isControl ? true : !visible))
+  }
+
   const currentLabel = formatTime(currentTime)
   const durationLabel = formatTime(duration)
 
   return (
-    <div ref={playerRef} className="wedding-video-player">
+    <div
+      ref={playerRef}
+      className={`wedding-video-player${touchControlsVisible ? ' wedding-video-player--touch-controls-visible' : ''}`}
+      onPointerDown={handlePointerDown}
+    >
       <div className="wedding-video-player__screen">
         <video
           ref={videoRef}

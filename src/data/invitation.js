@@ -25,7 +25,7 @@ export const invitationData = {
     },
     invitationType: 'reception-only',
     reception: {
-      type: 'Resepsi Pernikahan',
+      type: 'Wedding Reception',
       date: '2026-12-20',
       day: 'Ahad',
       startTime: '10:00',
@@ -37,7 +37,7 @@ export const invitationData = {
     name: null,
     address:
       'Jl. Raya Cipanas No.53B, Sindangmulya, Kec. Maja, Kabupaten Lebak, Banten 42381',
-    googleMapsUrl: null,
+    googleMapsUrl: 'https://maps.app.goo.gl/gqmfNou88CoJ52Gk7',
   },
   sections: {
     loveStory: {

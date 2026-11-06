@@ -4,6 +4,19 @@
   background: #1a1113;
 }
 
+.wedding-video-player__controls {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.wedding-video-player:hover .wedding-video-player__controls,
+.wedding-video-player:focus-within .wedding-video-player__controls,
+.wedding-video-player--touch-controls-visible .wedding-video-player__controls {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .wedding-video-player__screen {
   position: relative;
   width: 100%;
@@ -145,5 +158,11 @@
 
   .wedding-video-player__time {
     font-size: 0.6875rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wedding-video-player__controls {
+    transition: none;
   }
 }
