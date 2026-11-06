@@ -1,26 +1,35 @@
-import { Heart } from 'lucide-react'
+import { useCallback, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { invitationData } from './data/invitation.js'
+import { EditorialLoading } from './components/loading/index.js'
 
 export default function App() {
+  const { groom, bride } = invitationData.couple
+  const [isLoading, setIsLoading] = useState(true)
+  const handleLoadingComplete = useCallback(() => setIsLoading(false), [])
+
   return (
-    <main className="flex min-h-svh items-center justify-center bg-ivory px-6 py-16 text-burgundy">
-      <div className="w-full max-w-content text-center">
-        <p className="font-sans text-xs font-semibold tracking-[0.2em] text-maroon">
-          RIFKI & NATASHA · VERSI 2.0
-        </p>
-        <div
-          aria-hidden="true"
-          className="mx-auto my-8 flex size-12 items-center justify-center rounded-full border border-champagne"
+    <AnimatePresence mode="wait">
+      {isLoading ? (
+        <EditorialLoading key="editorial-loading" onComplete={handleLoadingComplete} />
+      ) : (
+        <motion.main
+          key="temporary-placeholder"
+          className="flex min-h-svh items-center justify-center bg-ivory px-6 py-16 text-center text-burgundy"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.35 }}
         >
-          <Heart size={18} strokeWidth={1.5} />
-        </div>
-        <h1 className="font-display text-4xl font-normal leading-tight sm:text-5xl">
-          Fondasi proyek siap dikembangkan
-        </h1>
-        <p className="mx-auto mt-5 max-w-reading font-sans text-base leading-7 text-ink-muted">
-          Struktur aplikasi dan design system sudah disiapkan. Isi undangan akan
-          dibangun pada tahap berikutnya.
-        </p>
-      </div>
-    </main>
+          <div className="max-w-reading">
+            <p className="font-sans text-xs font-medium tracking-[0.22em] text-maroon">
+              {bride.preferredName} &amp; {groom.preferredName}
+            </p>
+            <h1 className="mt-5 font-display text-2xl font-normal sm:text-3xl">
+              Undangan sedang disiapkan
+            </h1>
+          </div>
+        </motion.main>
+      )}
+    </AnimatePresence>
   )
 }

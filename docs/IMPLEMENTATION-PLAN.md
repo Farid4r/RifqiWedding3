@@ -8,17 +8,21 @@
   produksi berhasil.
 - Selesai jika semua konfigurasi tervalidasi dan token desain terdokumentasi.
 
-## Fase 2: Konten dan kebutuhan acara
+## Fase 2: Fondasi data dan aset
 
-- Kumpulkan detail acara dan keputusan fitur dari pemilik proyek.
-- Tentukan urutan informasi serta fungsi tiap tindakan tamu.
-- Selesai jika data yang diperlukan tersedia dan tidak ada konten acara fiktif.
+- Pusatkan identitas pasangan, riwayat akad, jadwal resepsi, lokasi, dan status
+  section di `src/data/invitation.js`.
+- Siapkan manifest file dan direktori aset tanpa menamai file yang belum ada.
+- Tambahkan utility nama tamu dan countdown resepsi yang dapat diuji terpisah.
+- Selesai jika identitas dan jadwal benar, nilai yang belum tersedia tetap
+  kosong, serta countdown hanya memakai jadwal resepsi.
 
 ## Fase 3: Komponen dan halaman undangan
 
+- Kumpulkan keputusan tampilan dan materi visual dari pemilik proyek.
 - Bangun komponen dan section secara modular sesuai spesifikasi yang disepakati.
 - Tambahkan layout mobile-first, states yang jelas, dan semantik aksesibel.
-- Selesai jika alur informasi berjalan di viewport ponsel dan desktop.
+- Selesai jika alur informasi resepsi berjalan di viewport ponsel dan desktop.
 
 ## Fase 4: Interaksi dan motion
 
