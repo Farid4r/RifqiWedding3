@@ -40,7 +40,13 @@ export const invitationData = {
     googleMapsUrl: null,
   },
   sections: {
-    loveStory: [],
+    loveStory: {
+      eyebrow: 'OUR STORY',
+      title: 'A Moment to Remember',
+      narrative:
+        'Dua insan dipertemukan dalam sebuah pertemuan sederhana. Dari pertemuan itu, tumbuh keyakinan untuk melangkah bersama. Tanpa harus melalui kisah yang panjang, kami memilih untuk membawa niat baik ini ke jenjang yang lebih serius melalui sebuah lamaran. Kini, dengan penuh rasa syukur, kami siap memulai perjalanan baru sebagai dua hati yang dipersatukan dalam ikatan pernikahan.',
+      closing: 'A New Chapter',
+    },
     gallery: [],
     music: null,
     rsvp: null,

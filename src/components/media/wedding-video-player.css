@@ -1,0 +1,149 @@
+.wedding-video-player {
+  overflow: hidden;
+  border: 1px solid rgb(214 189 155 / 76%);
+  background: #1a1113;
+}
+
+.wedding-video-player__screen {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #1a1113;
+}
+
+.wedding-video-player__video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.wedding-video-player__overlay-play {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.65rem 1rem;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgb(245 239 232 / 78%);
+  background: rgb(100 31 50 / 92%);
+  color: var(--surface-ivory);
+  font-family: var(--family-body);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.wedding-video-player__overlay-play:hover {
+  background: var(--brand-maroon);
+}
+
+.wedding-video-player__controls {
+  display: flex;
+  min-height: 3.75rem;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background: var(--surface-cream);
+  color: var(--brand-burgundy);
+}
+
+.wedding-video-player__control {
+  display: inline-grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: 0 0 2.75rem;
+  place-items: center;
+  border: 0;
+  border-radius: var(--corner-control);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.wedding-video-player__control:hover {
+  background: rgb(100 31 50 / 8%);
+}
+
+.wedding-video-player__control:active {
+  background: rgb(100 31 50 / 14%);
+}
+
+.wedding-video-player__progress {
+  display: flex;
+  min-width: 0;
+  height: 2.75rem;
+  flex: 1 1 auto;
+  align-items: center;
+}
+
+.wedding-video-player__progress input {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  accent-color: var(--brand-maroon);
+  cursor: pointer;
+}
+
+.wedding-video-player__progress input:disabled {
+  cursor: not-allowed;
+}
+
+.wedding-video-player__time {
+  flex: 0 0 auto;
+  color: var(--ink-muted);
+  font-family: var(--family-body);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.wedding-video-player__error {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgb(26 17 19 / 84%);
+  color: var(--surface-ivory);
+  text-align: center;
+}
+
+.wedding-video-player__error p {
+  margin: 0;
+}
+
+.wedding-video-player__error button {
+  min-height: 2.75rem;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--accent-champagne);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.wedding-video-player__error button:hover {
+  background: rgb(245 239 232 / 12%);
+}
+
+@media (max-width: 24rem) {
+  .wedding-video-player__controls {
+    gap: 0.25rem;
+    padding-inline: 0.25rem;
+  }
+
+  .wedding-video-player__control {
+    width: 2.5rem;
+    flex-basis: 2.5rem;
+  }
+
+  .wedding-video-player__time {
+    font-size: 0.6875rem;
+  }
+}

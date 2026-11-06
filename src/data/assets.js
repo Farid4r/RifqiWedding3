@@ -21,6 +21,12 @@ export const invitationAssets = {
     width: 1260,
     height: 1680,
   },
+  loveStoryVideo: {
+    src: 'https://res.cloudinary.com/ehjpbgpu/video/upload/q_auto/akad.mp4',
+    type: 'video/mp4',
+    poster:
+      'https://res.cloudinary.com/ehjpbgpu/video/upload/so_auto,q_auto,f_jpg/akad.jpg',
+  },
   loading: [],
   gallery: [],
   music: null,
