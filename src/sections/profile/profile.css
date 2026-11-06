@@ -1,0 +1,123 @@
+.couple-profile-section {
+  padding: clamp(3.5rem, 8vw, 7rem) 1.25rem clamp(4rem, 9vw, 8rem);
+  background: var(--surface-cream);
+  color: var(--brand-burgundy);
+}
+
+.couple-profile-section__inner {
+  width: min(100%, var(--width-content));
+  margin-inline: auto;
+}
+
+.couple-profile-section__heading {
+  margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+  text-align: center;
+}
+
+.couple-profile-section__eyebrow,
+.couple-profile__label {
+  margin: 0;
+  color: var(--brand-maroon);
+  font-family: var(--family-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  line-height: 1.5;
+}
+
+.couple-profile-section__heading h2 {
+  margin: 0.6rem 0 0;
+  font-family: var(--family-display);
+  font-size: clamp(2.1rem, 6vw, 3.5rem);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+}
+
+.couple-profile-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 3rem;
+}
+
+.couple-profile {
+  min-width: 0;
+}
+
+.couple-profile__portrait {
+  width: min(100%, 27rem);
+  margin: 0 auto;
+  padding: 0.5rem;
+  border: 1px solid rgb(214 189 155 / 78%);
+  background: var(--surface-ivory);
+}
+
+.couple-profile__portrait img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center 38%;
+}
+
+.couple-profile__details {
+  max-width: 27rem;
+  margin: 1.5rem auto 0;
+  text-align: center;
+}
+
+.couple-profile__name {
+  margin: 0.65rem 0 0;
+  font-family: var(--family-display);
+  font-size: clamp(1.7rem, 5vw, 2.5rem);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.couple-profile__parents {
+  max-width: 32ch;
+  margin: 0.8rem auto 0;
+  color: var(--ink-muted);
+  font-family: var(--family-body);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+@media (min-width: 40rem) {
+  .couple-profile-section {
+    padding-inline: 2.5rem;
+  }
+
+  .couple-profile-grid {
+    gap: 4rem;
+  }
+
+  .couple-profile__portrait {
+    width: min(100%, 29rem);
+    padding: 0.65rem;
+  }
+}
+
+@media (min-width: 60rem) {
+  .couple-profile-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(3rem, 7vw, 6.5rem);
+    row-gap: 0;
+  }
+
+  .couple-profile--groom {
+    padding-left: clamp(2rem, 4vw, 4rem);
+    border-left: 1px solid var(--line-border);
+  }
+
+  .couple-profile__portrait,
+  .couple-profile__details {
+    max-width: none;
+  }
+
+  .couple-profile__details {
+    margin-top: 1.75rem;
+  }
+}

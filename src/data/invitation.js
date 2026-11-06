@@ -1,19 +1,19 @@
 export const invitationData = {
   couple: {
     bride: {
-      fullName: 'Natashya Zahra N, S.A.B.',
+      fullName: 'Natashya Zahra N., S.A.B.',
       preferredName: 'Natashya',
       parents: {
-        father: null,
-        mother: null,
+        father: '(Alm.) Nurdin',
+        mother: 'Yuli Mariana M., S.Pd.',
       },
     },
     groom: {
       fullName: 'M. Rifqi Subakti, S.Ars.',
       preferredName: 'Rifqi',
       parents: {
-        father: null,
-        mother: null,
+        father: 'H. Asep Bakti',
+        mother: 'Hj. Titin Sumarni, S.Pdi.',
       },
     },
   },
