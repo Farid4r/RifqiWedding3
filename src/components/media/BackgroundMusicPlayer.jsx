@@ -1,16 +1,15 @@
 import { useId } from 'react'
-import { Music2, Pause, Play, Volume2, VolumeX } from 'lucide-react'
+import { Pause, Play, Volume2, VolumeX } from 'lucide-react'
 import './background-music-player.css'
 
 export default function BackgroundMusicPlayer({ music }) {
   const statusId = useId()
+  const isAudiblyPlaying = music.isPlaying && !music.isMuted && !music.isVideoPlaying
   const playbackLabel = music.error
     ? 'Coba putar musik'
-    : music.isStarting
-      ? 'Memulai musik'
-      : music.wantsPlayback && (music.isPlaying || music.isVideoPlaying)
-        ? 'Jeda musik'
-        : 'Putar musik'
+    : isAudiblyPlaying || (music.wantsPlayback && music.isVideoPlaying)
+      ? 'Jeda musik'
+      : 'Putar musik'
 
   let status = 'Musik belum diputar.'
   if (music.error) status = music.error
@@ -22,47 +21,44 @@ export default function BackgroundMusicPlayer({ music }) {
   else if (music.isReady) status = 'Musik siap diputar.'
 
   return (
-    <aside className="background-music" aria-label="Pemutar musik undangan">
-      <div className="background-music__identity" aria-hidden="true">
-        <span className={`background-music__mark${music.isPlaying && !music.isMuted ? ' background-music__mark--playing' : ''}`}>
-          <Music2 size={16} strokeWidth={1.7} />
+    <aside
+      className={`vinyl-player${isAudiblyPlaying ? ' is-playing' : ''}${music.error ? ' has-error' : ''}`}
+      aria-label="Pemutar musik undangan"
+    >
+      <button
+        className="vinyl-player__record"
+        type="button"
+        onClick={music.togglePlayback}
+        aria-label={playbackLabel}
+        aria-describedby={statusId}
+        aria-pressed={isAudiblyPlaying}
+        disabled={music.isMuted && !music.error}
+      >
+        <img src="/piring-hitam.png" alt="" draggable="false" />
+        <span className="vinyl-player__playback-icon" aria-hidden="true">
+          {isAudiblyPlaying ? <Pause size={13} /> : <Play size={13} fill="currentColor" />}
         </span>
-        <span className="background-music__title">Our Song</span>
-      </div>
+      </button>
 
-      <div className="background-music__controls" role="group" aria-label="Kontrol musik undangan">
-        <button
-          className="background-music__button"
-          type="button"
-          onClick={music.togglePlayback}
-          aria-label={playbackLabel}
-          aria-describedby={statusId}
-          aria-pressed={music.isPlaying && !music.isMuted}
-          disabled={music.isMuted && !music.error}
-        >
-          {music.wantsPlayback && (music.isPlaying || music.isVideoPlaying) ? (
-            <Pause size={18} aria-hidden="true" />
-          ) : (
-            <Play size={18} fill="currentColor" aria-hidden="true" />
-          )}
-        </button>
-        <button
-          className="background-music__button"
-          type="button"
-          onClick={music.toggleMute}
-          aria-label={music.isMuted ? 'Nyalakan suara musik' : 'Bisukan musik'}
-          aria-pressed={music.isMuted}
-          aria-describedby={statusId}
-        >
-          {music.isMuted ? (
-            <VolumeX size={18} aria-hidden="true" />
-          ) : (
-            <Volume2 size={18} aria-hidden="true" />
-          )}
-        </button>
-      </div>
+      <button
+        className="vinyl-player__mute"
+        type="button"
+        onClick={music.toggleMute}
+        aria-label={music.isMuted ? 'Nyalakan suara musik' : 'Bisukan musik'}
+        aria-pressed={music.isMuted}
+        aria-describedby={statusId}
+      >
+        {music.isMuted ? (
+          <VolumeX size={18} aria-hidden="true" />
+        ) : (
+          <Volume2 size={18} aria-hidden="true" />
+        )}
+      </button>
 
-      <p className="background-music__status" id={statusId} role="status" aria-live="polite">
+      {isAudiblyPlaying && (
+        <span className="vinyl-player__playing-indicator" aria-hidden="true" />
+      )}
+      <p className="vinyl-player__status" id={statusId} role="status" aria-live="polite">
         {status}
       </p>
     </aside>

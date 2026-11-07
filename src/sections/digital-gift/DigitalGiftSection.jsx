@@ -8,7 +8,7 @@ export default function DigitalGiftSection() {
   if (!gift?.enabled) return null
 
   return (
-    <section className="digital-gift" aria-labelledby="digital-gift-title">
+    <section id="gift" className="digital-gift" aria-labelledby="digital-gift-title">
       <div className="digital-gift__inner">
         <header className="digital-gift__heading">
           <p className="digital-gift__eyebrow">A TOKEN OF APPRECIATION</p>

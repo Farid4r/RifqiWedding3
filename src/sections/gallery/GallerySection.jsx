@@ -3,17 +3,19 @@ import { invitationAssets } from '../../data/assets.js'
 import GalleryLightbox from './GalleryLightbox.jsx'
 import './gallery-section.css'
 
-export default function GallerySection() {
+export default function GallerySection({ onLightboxChange }) {
   const [activeIndex, setActiveIndex] = useState(null)
   const gallery = invitationAssets.gallery
 
   function openLightbox(index) {
     setActiveIndex(index)
+    onLightboxChange?.(true)
   }
 
   const closeLightbox = useCallback(() => {
     setActiveIndex(null)
-  }, [])
+    onLightboxChange?.(false)
+  }, [onLightboxChange])
 
   const navigateLightbox = useCallback((nextIndex) => {
     setActiveIndex((currentIndex) =>
@@ -22,7 +24,7 @@ export default function GallerySection() {
   }, [gallery.length])
 
   return (
-    <section className="gallery-section" aria-labelledby="gallery-title">
+    <section id="gallery" className="gallery-section" aria-labelledby="gallery-title">
       <div className="gallery-section__inner">
         <header className="gallery-section__heading">
           <p className="gallery-section__eyebrow">OUR MOMENTS</p>

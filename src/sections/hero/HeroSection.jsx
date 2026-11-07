@@ -43,6 +43,7 @@ export default function HeroSection() {
 
   return (
     <motion.section
+      id="home"
       className="hero-section relative isolate grid min-h-svh place-items-center overflow-x-hidden bg-ivory px-5 py-10 text-burgundy sm:px-8 md:px-12 md:py-14"
       aria-labelledby="hero-title"
       initial={{ opacity: 0 }}

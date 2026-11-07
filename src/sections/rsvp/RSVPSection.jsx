@@ -62,6 +62,7 @@ export default function RSVPSection() {
 
   return (
     <motion.section
+      id="rsvp"
       className="rsvp-section"
       aria-labelledby="rsvp-title"
       initial={reduceMotion ? false : { opacity: 0, y: 14 }}

@@ -12,7 +12,7 @@ export default function LoveStorySection({ onPlaybackStateChange }) {
   }
 
   return (
-    <section className="love-story" aria-labelledby="love-story-title">
+    <section id="story" className="love-story" aria-labelledby="love-story-title">
       <div className="love-story__inner">
         <div className="love-story__introduction">
           <motion.header

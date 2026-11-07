@@ -68,7 +68,7 @@ export default function CoupleProfileSection() {
   const reduceMotion = useReducedMotion()
 
   return (
-    <section className="couple-profile-section" aria-labelledby="couple-profile-title">
+    <section id="couple" className="couple-profile-section" aria-labelledby="couple-profile-title">
       <div className="couple-profile-section__inner">
         <header className="couple-profile-section__heading">
           <p className="couple-profile-section__eyebrow">THE COUPLE</p>

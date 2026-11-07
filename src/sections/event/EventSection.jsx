@@ -23,7 +23,7 @@ export default function EventSection() {
   const motionClass = reduceMotion ? '' : 'event-section--animate'
 
   return (
-    <section className={`event-section ${motionClass}`} aria-labelledby="event-title">
+    <section id="event" className={`event-section ${motionClass}`} aria-labelledby="event-title">
       <div className="event-section__inner">
         <header className="event-section__heading">
           <p className="event-section__eyebrow">SAVE THE DATE</p>
