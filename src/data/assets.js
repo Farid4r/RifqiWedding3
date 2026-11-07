@@ -60,6 +60,9 @@ export const invitationAssets = {
       alt: 'Rifqi dan Natashya duduk berpose bersama',
     },
   ],
-  music: null,
+  music: {
+    src: '/music/wedding-song.mp3',
+    type: 'audio/mpeg',
+  },
   favicon: '/favicon/favicon.svg',
 }

@@ -3,7 +3,7 @@ import { invitationData } from '../../data/invitation.js'
 import WeddingVideoPlayer from '../../components/media/WeddingVideoPlayer.jsx'
 import './love-story.css'
 
-export default function LoveStorySection() {
+export default function LoveStorySection({ onPlaybackStateChange }) {
   const reduceMotion = useReducedMotion()
   const story = invitationData.sections.loveStory
   const revealTransition = {
@@ -48,7 +48,7 @@ export default function LoveStorySection() {
         </div>
 
         <div className="love-story__film">
-          <WeddingVideoPlayer />
+          <WeddingVideoPlayer onPlaybackStateChange={onPlaybackStateChange} />
         </div>
 
         <footer className="love-story__closing">

@@ -1,0 +1,107 @@
+.background-music {
+  position: fixed;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  z-index: 40;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.65rem 0.9rem;
+  width: min(19rem, calc(100vw - 2rem));
+  padding: 0.65rem 0.75rem;
+  border: 1px solid rgb(214 189 155 / 76%);
+  border-radius: var(--corner-card);
+  background: rgb(251 248 243 / 96%);
+  color: var(--brand-burgundy);
+  box-shadow: 0 5px 24px rgb(45 26 30 / 10%);
+  backdrop-filter: blur(12px);
+}
+
+.background-music__identity {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.background-music__mark {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  flex: 0 0 2rem;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--brand-burgundy);
+  color: var(--surface-ivory);
+}
+
+.background-music__mark--playing svg {
+  animation: music-mark-pulse 1.5s ease-in-out infinite;
+}
+
+.background-music__title {
+  overflow: hidden;
+  color: var(--brand-burgundy);
+  font-family: var(--family-display);
+  font-size: var(--type-base);
+  font-style: italic;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.background-music__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.background-music__button {
+  display: inline-grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: 0 0 2.75rem;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: var(--corner-control);
+  background: transparent;
+  color: var(--brand-burgundy);
+  cursor: pointer;
+  transition: background-color var(--motion-duration-fast) ease;
+}
+
+.background-music__button:hover:not(:disabled) {
+  background: rgb(100 31 50 / 8%);
+}
+
+.background-music__button:focus-visible {
+  outline: 2px solid var(--brand-maroon);
+  outline-offset: 2px;
+}
+
+.background-music__button:disabled {
+  cursor: not-allowed;
+  opacity: 0.52;
+}
+
+.background-music__status {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--ink-muted);
+  font-family: var(--family-body);
+  font-size: var(--type-xs);
+  line-height: 1.4;
+}
+
+@keyframes music-mark-pulse {
+  50% { transform: scale(0.88); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .background-music__mark--playing svg {
+    animation: none;
+  }
+
+  .background-music__button {
+    transition: none;
+  }
+}

@@ -48,8 +48,29 @@ export const invitationData = {
       closing: 'A New Chapter',
     },
     gallery: [],
-    music: null,
+    music: {
+      enabled: true,
+    },
     rsvp: null,
-    digitalGift: null,
+    digitalGift: {
+      enabled: true,
+      title: 'A Gift of Love',
+      description:
+        'Doa dan kehadiran Anda adalah hadiah terindah. Jika berkenan, informasi rekening tersedia di bawah ini.',
+      accounts: [
+        {
+          id: 'bca',
+          bank: 'Bank BCA',
+          accountHolder: 'M. Rifqi Subakti',
+          accountNumber: '5421170089',
+        },
+        {
+          id: 'mandiri',
+          bank: 'Bank Mandiri',
+          accountHolder: 'Natashya Zahra N.',
+          accountNumber: '1310019624107',
+        },
+      ],
+    },
   },
 }

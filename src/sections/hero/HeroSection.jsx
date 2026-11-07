@@ -109,10 +109,10 @@ export default function HeroSection() {
             <p className="font-medium text-burgundy">
               {formatReceptionDate(reception.date)}
             </p>
-            <p>{formatReceptionTime(reception)}</p>
+            {/* <p>{formatReceptionTime(reception)}</p>
             <p className="mx-auto max-w-reading leading-6 md:mx-0">
               {invitationData.location.address}
-            </p>
+            </p> */}
           </div>
         </motion.div>
       </div>

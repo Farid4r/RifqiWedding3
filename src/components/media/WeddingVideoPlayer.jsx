@@ -12,10 +12,10 @@ function formatTime(seconds) {
   return `${minutes}:${String(remainingSeconds).padStart(2, '0')}`
 }
 
-export default function WeddingVideoPlayer({ onAudioStateChange, onPlaybackEnded }) {
+export default function WeddingVideoPlayer({ onPlaybackStateChange }) {
   const playerRef = useRef(null)
   const videoRef = useRef(null)
-  const callbacksRef = useRef({ onAudioStateChange, onPlaybackEnded })
+  const callbacksRef = useRef({ onPlaybackStateChange })
   const autoplayAttemptedRef = useRef(false)
   const [isNearViewport, setIsNearViewport] = useState(false)
   const [sourceReady, setSourceReady] = useState(false)
@@ -30,11 +30,16 @@ export default function WeddingVideoPlayer({ onAudioStateChange, onPlaybackEnded
   const videoAsset = invitationAssets.loveStoryVideo
 
   useEffect(() => {
-    callbacksRef.current = { onAudioStateChange, onPlaybackEnded }
-  }, [onAudioStateChange, onPlaybackEnded])
+    callbacksRef.current = { onPlaybackStateChange }
+  }, [onPlaybackStateChange])
 
-  const reportAudioState = useCallback((active, reason) => {
-    callbacksRef.current.onAudioStateChange?.({ active, reason })
+  const reportPlaybackState = useCallback((video, reason) => {
+    if (!video) return
+    callbacksRef.current.onPlaybackStateChange?.({
+      isPlaying: !video.paused && !video.ended,
+      isMuted: video.muted,
+      reason,
+    })
   }, [])
 
   useEffect(() => {
@@ -83,10 +88,14 @@ export default function WeddingVideoPlayer({ onAudioStateChange, onPlaybackEnded
       const playPromise = video.play()
       playPromise?.then(
         () => setHasError(false),
-        () => setPlayRequested(false),
+        () => {
+          setPlayRequested(false)
+          reportPlaybackState(video, 'play-rejected')
+        },
       )
     } catch {
       setPlayRequested(false)
+      reportPlaybackState(video, 'play-rejected')
     }
 
     return undefined
@@ -104,17 +113,18 @@ export default function WeddingVideoPlayer({ onAudioStateChange, onPlaybackEnded
     if (video && video.readyState < HTMLMediaElement.HAVE_FUTURE_DATA && !video.muted) {
       video.muted = true
       setIsMuted(true)
-      reportAudioState(false, 'muted')
+      reportPlaybackState(video, 'muted')
     }
 
     if (video && sourceReady && video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
       try {
         video.play()?.then(
           () => setHasError(false),
-          () => {},
+          () => reportPlaybackState(video, 'play-rejected'),
         )
       } catch {
         setPlayRequested(false)
+        reportPlaybackState(video, 'play-rejected')
       }
       return
     }
@@ -147,7 +157,7 @@ export default function WeddingVideoPlayer({ onAudioStateChange, onPlaybackEnded
     if (!video.muted) {
       video.muted = true
       setIsMuted(true)
-      reportAudioState(false, 'muted')
+      reportPlaybackState(video, 'muted')
     }
     setHasError(false)
     setSourceReady(true)
@@ -196,27 +206,27 @@ export default function WeddingVideoPlayer({ onAudioStateChange, onPlaybackEnded
           onPlay={(event) => {
             setIsPlaying(true)
             setPlayRequested(false)
-            if (!event.currentTarget.muted) reportAudioState(true, 'playing')
+            reportPlaybackState(event.currentTarget, 'playing')
           }}
-          onPause={() => {
+          onPlaying={(event) => reportPlaybackState(event.currentTarget, 'playing')}
+          onPause={(event) => {
             setIsPlaying(false)
-            reportAudioState(false, 'paused')
+            reportPlaybackState(event.currentTarget, 'paused')
           }}
           onVolumeChange={(event) => {
             const muted = event.currentTarget.muted
             setIsMuted(muted)
-            reportAudioState(!muted, muted ? 'muted' : 'unmuted')
+            reportPlaybackState(event.currentTarget, muted ? 'muted' : 'unmuted')
           }}
-          onEnded={() => {
+          onEnded={(event) => {
             setIsPlaying(false)
             setPlayRequested(false)
-            reportAudioState(false, 'ended')
-            callbacksRef.current.onPlaybackEnded?.()
+            reportPlaybackState(event.currentTarget, 'ended')
           }}
-          onError={() => {
+          onError={(event) => {
             setHasError(true)
             setIsPlaying(false)
-            reportAudioState(false, 'paused')
+            reportPlaybackState(event.currentTarget, 'error')
           }}
         >
           {sourceReady && <source src={videoAsset.src} type={videoAsset.type} />}
