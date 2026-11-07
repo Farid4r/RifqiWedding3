@@ -65,10 +65,10 @@ export default function RSVPSection() {
       id="rsvp"
       className="rsvp-section"
       aria-labelledby="rsvp-title"
-      initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+      initial={reduceMotion ? false : { opacity: 1, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.12 }}
-      transition={{ duration: reduceMotion ? 0 : 0.45, ease: [0.2, 0, 0, 1] }}
+      transition={{ duration: reduceMotion ? 0 : 0.35, ease: [0.2, 0, 0, 1] }}
     >
       <div className="rsvp-section__inner">
         <header className="rsvp-section__heading">

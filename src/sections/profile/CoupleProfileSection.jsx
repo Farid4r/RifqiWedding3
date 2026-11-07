@@ -22,19 +22,18 @@ const profileEntries = [
 
 function Profile({ entry, index, reduceMotion }) {
   const transition = {
-    duration: reduceMotion ? 0 : 0.55,
-    delay: reduceMotion ? 0 : index * 0.12,
+    duration: reduceMotion ? 0 : 0.45,
+    delay: reduceMotion ? 0 : index * 0.08,
     ease: [0.2, 0, 0, 1],
   }
 
   return (
     <motion.article
       className={`couple-profile couple-profile--${entry.id}`}
-      initial={reduceMotion ? 'visible' : 'hidden'}
+      initial={reduceMotion ? false : { opacity: 1, y: 14 }}
       whileInView="visible"
       viewport={{ once: true, amount: 0.18 }}
       variants={{
-        hidden: { opacity: 0, y: reduceMotion ? 0 : 18 },
         visible: { opacity: 1, y: 0, transition },
       }}
       aria-labelledby={`${entry.id}-name`}

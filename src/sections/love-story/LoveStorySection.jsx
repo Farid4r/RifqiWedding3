@@ -7,7 +7,7 @@ export default function LoveStorySection({ onPlaybackStateChange }) {
   const reduceMotion = useReducedMotion()
   const story = invitationData.sections.loveStory
   const revealTransition = {
-    duration: reduceMotion ? 0 : 0.55,
+    duration: reduceMotion ? 0 : 0.45,
     ease: [0.2, 0, 0, 1],
   }
 
@@ -17,11 +17,10 @@ export default function LoveStorySection({ onPlaybackStateChange }) {
         <div className="love-story__introduction">
           <motion.header
             className="love-story__heading"
-            initial={reduceMotion ? 'visible' : 'hidden'}
+            initial={reduceMotion ? false : { opacity: 1, y: 12 }}
             whileInView="visible"
-            viewport={{ once: true, amount: 0.35 }}
+            viewport={{ once: true, amount: 0.2 }}
             variants={{
-              hidden: { opacity: 0, y: reduceMotion ? 0 : 14 },
               visible: { opacity: 1, y: 0, transition: revealTransition },
             }}
           >
@@ -31,15 +30,14 @@ export default function LoveStorySection({ onPlaybackStateChange }) {
 
           <motion.p
             className="love-story__narrative"
-            initial={reduceMotion ? 'visible' : 'hidden'}
+            initial={reduceMotion ? false : { opacity: 1, y: 12 }}
             whileInView="visible"
-            viewport={{ once: true, amount: 0.25 }}
+            viewport={{ once: true, amount: 0.18 }}
             variants={{
-              hidden: { opacity: 0, y: reduceMotion ? 0 : 14 },
               visible: {
                 opacity: 1,
                 y: 0,
-                transition: { ...revealTransition, delay: reduceMotion ? 0 : 0.08 },
+                transition: { ...revealTransition, delay: reduceMotion ? 0 : 0.06 },
               },
             }}
           >

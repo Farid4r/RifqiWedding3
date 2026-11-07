@@ -155,7 +155,7 @@ export default function EditorialLoading({ onComplete }) {
 
   const { bride, groom } = invitationData.couple
   const { reception } = invitationData.wedding
-  const exitDuration = shouldReduceMotion ? 0.18 : 0.75
+  const exitDuration = shouldReduceMotion ? 0 : 0.55
 
   return (
     <motion.main
@@ -175,7 +175,10 @@ export default function EditorialLoading({ onComplete }) {
           className="mb-6 font-sans text-[0.65rem] font-medium tracking-[0.34em] text-champagne sm:mb-8 sm:text-xs"
           initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: shouldReduceMotion ? 0.15 : 0.7, delay: 0.12 }}
+          transition={{
+            duration: shouldReduceMotion ? 0 : 0.45,
+            delay: shouldReduceMotion ? 0 : 0.05,
+          }}
         >
           THE WEDDING OF
         </motion.p>
@@ -183,7 +186,10 @@ export default function EditorialLoading({ onComplete }) {
           className="whitespace-nowrap font-display text-[clamp(1.8rem,8.5vw,7.5rem)] font-normal leading-[0.98] tracking-[-0.045em] text-ivory"
           initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: shouldReduceMotion ? 0.18 : 0.85, delay: 0.2 }}
+          transition={{
+            duration: shouldReduceMotion ? 0 : 0.55,
+            delay: shouldReduceMotion ? 0 : 0.1,
+          }}
         >
           {bride.preferredName} <span className="font-display italic text-champagne">&amp;</span>{' '}
           {groom.preferredName}
@@ -192,7 +198,10 @@ export default function EditorialLoading({ onComplete }) {
           className="mt-5 font-sans text-xs font-medium tracking-[0.28em] text-ivory/85 sm:mt-7 sm:text-sm"
           initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: shouldReduceMotion ? 0.18 : 0.7, delay: 0.34 }}
+          transition={{
+            duration: shouldReduceMotion ? 0 : 0.45,
+            delay: shouldReduceMotion ? 0 : 0.15,
+          }}
         >
           {reception.date.split('-').reverse().join('.')}
         </motion.p>
