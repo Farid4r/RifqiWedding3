@@ -28,7 +28,38 @@ export const invitationAssets = {
       'https://res.cloudinary.com/ehjpbgpu/video/upload/so_auto,q_auto,f_jpg/akad.jpg',
   },
   loading: [],
-  gallery: [],
+  gallery: [
+    {
+      src: '/images/gallery/gallery-01.jpg',
+      width: 768,
+      height: 1152,
+      alt: 'Rifqi dan Natashya berfoto bersama setelah wisuda',
+    },
+    {
+      src: '/images/gallery/gallery-02.jpg',
+      width: 768,
+      height: 1152,
+      alt: 'Rifqi dan Natashya tersenyum bersama',
+    },
+    {
+      src: '/images/gallery/gallery-03.jpg',
+      width: 768,
+      height: 1152,
+      alt: 'Rifqi dan Natashya berfoto di balik lengkung merah',
+    },
+    {
+      src: '/images/gallery/gallery-04.jpg',
+      width: 768,
+      height: 1152,
+      alt: 'Rifqi dan Natashya berpose bersama mengenakan medali wisuda',
+    },
+    {
+      src: '/images/gallery/gallery-05.jpg',
+      width: 768,
+      height: 1152,
+      alt: 'Rifqi dan Natashya duduk berpose bersama',
+    },
+  ],
   music: null,
   favicon: '/favicon/favicon.svg',
 }

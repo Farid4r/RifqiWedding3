@@ -1,0 +1,242 @@
+.rsvp-section {
+  padding: clamp(4rem, 9vw, 8rem) 1.25rem;
+  background: var(--surface-cream);
+  color: var(--brand-burgundy);
+}
+
+.rsvp-section__inner {
+  width: min(100%, var(--width-content));
+  margin-inline: auto;
+}
+
+.rsvp-section__heading {
+  margin: 0 auto clamp(2rem, 5vw, 3.5rem);
+  text-align: center;
+}
+
+.rsvp-section__eyebrow {
+  margin: 0 0 0.75rem;
+  color: var(--brand-maroon);
+  font-family: var(--family-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+}
+
+.rsvp-section__heading h2 {
+  margin: 0;
+  font-family: var(--family-display);
+  font-size: clamp(2.25rem, 7vw, 4.5rem);
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+.rsvp-section__configuration {
+  max-width: 42rem;
+  margin: 0 auto 1.5rem;
+  padding: 0.85rem 1rem;
+  border-left: 2px solid var(--accent-champagne);
+  background: var(--surface-ivory);
+  color: var(--ink-muted);
+  font-family: var(--family-body);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.rsvp-section__content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2.5rem, 6vw, 4.5rem);
+  align-items: start;
+}
+
+.rsvp-form {
+  display: grid;
+  gap: 1.15rem;
+  min-width: 0;
+}
+
+.rsvp-form__field {
+  display: grid;
+  min-width: 0;
+  gap: 0.45rem;
+}
+
+.rsvp-form__field label {
+  color: var(--brand-burgundy);
+  font-family: var(--family-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.rsvp-form__field input,
+.rsvp-form__field select,
+.rsvp-form__field textarea {
+  width: 100%;
+  min-height: 2.875rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--line-border);
+  border-radius: var(--corner-control);
+  background: var(--surface-ivory);
+  color: var(--brand-burgundy);
+  font: inherit;
+  font-family: var(--family-body);
+  font-size: 1rem;
+}
+
+.rsvp-form__field textarea {
+  min-height: 7rem;
+  resize: vertical;
+}
+
+.rsvp-form__field input:focus-visible,
+.rsvp-form__field select:focus-visible,
+.rsvp-form__field textarea:focus-visible {
+  outline: 2px solid var(--brand-maroon);
+  outline-offset: 2px;
+}
+
+.rsvp-form__field input:disabled,
+.rsvp-form__field select:disabled,
+.rsvp-form__field textarea:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.rsvp-form__counter {
+  justify-self: end;
+  color: var(--ink-muted);
+  font-family: var(--family-body);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.rsvp-form__feedback {
+  margin: 0;
+  font-family: var(--family-body);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.rsvp-form__feedback--success {
+  color: var(--brand-maroon);
+}
+
+.rsvp-form__feedback--error {
+  color: var(--brand-burgundy);
+}
+
+.rsvp-form__submit {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 2.875rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.25rem;
+  border: 1px solid var(--brand-burgundy);
+  border-radius: var(--corner-control);
+  background: var(--brand-burgundy);
+  color: var(--surface-ivory);
+  font-family: var(--family-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.rsvp-form__submit:hover:not(:disabled) {
+  background: var(--brand-maroon);
+}
+
+.rsvp-form__submit:focus-visible {
+  outline: 2px solid var(--brand-maroon);
+  outline-offset: 3px;
+}
+
+.rsvp-form__submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.wishes-list {
+  min-width: 0;
+}
+
+.wishes-list h3 {
+  margin: 0 0 1.25rem;
+  font-family: var(--family-display);
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 400;
+}
+
+.wishes-list__state {
+  margin: 0;
+  color: var(--ink-muted);
+  font-family: var(--family-body);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.wishes-list__entries {
+  display: grid;
+  gap: 0;
+  max-height: 38rem;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+  overscroll-behavior: contain;
+}
+
+.wishes-list__entry {
+  padding: 1rem 0;
+  border-top: 1px solid var(--line-border);
+}
+
+.wishes-list__sender {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--brand-maroon);
+  font-family: var(--family-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.wishes-list__entry > p {
+  margin: 0.6rem 0;
+  color: var(--brand-burgundy);
+  font-family: var(--family-body);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.wishes-list__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  color: var(--ink-muted);
+  font-family: var(--family-body);
+  font-size: 0.75rem;
+}
+
+@media (min-width: 48rem) {
+  .rsvp-section {
+    padding-inline: 3rem;
+  }
+
+  .rsvp-section__content {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: clamp(2.5rem, 6vw, 5rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rsvp-form__submit {
+    transition: none;
+  }
+}
