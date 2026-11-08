@@ -5,6 +5,8 @@ import EventSection from '../sections/event/EventSection.jsx'
 import GallerySection from '../sections/gallery/GallerySection.jsx'
 import RSVPSection from '../sections/rsvp/RSVPSection.jsx'
 import DigitalGiftSection from '../sections/digital-gift/DigitalGiftSection.jsx'
+import ThankYouSection from '../sections/thank-you/ThankYouSection.jsx'
+import CreatorFooter from '../components/layout/CreatorFooter.jsx'
 import FloatingNavigation from '../components/navigation/FloatingNavigation.jsx'
 import BackgroundMusicPlayer from '../components/media/BackgroundMusicPlayer.jsx'
 import { useCallback, useEffect, useState } from 'react'
@@ -92,12 +94,14 @@ export default function InvitationLayout({ music, showMusic }) {
       <main className="invitation-content">
         <HeroSection />
         <CoupleProfileSection />
-        <LoveStorySection onPlaybackStateChange={music.handleVideoPlaybackStateChange} />
+        <LoveStorySection />
         <EventSection />
         <GallerySection onLightboxChange={handleLightboxChange} />
         <RSVPSection />
         <DigitalGiftSection />
+        <ThankYouSection />
       </main>
+      <CreatorFooter />
       {!isLightboxOpen && (
         <>
           <FloatingNavigation onMoreMenuChange={handleMoreMenuChange} />

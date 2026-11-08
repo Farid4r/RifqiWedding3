@@ -9,14 +9,12 @@ export default function useBackgroundMusic({ src }) {
   const isPlayingRef = useRef(false)
   const isMutedRef = useRef(false)
   const wantsPlaybackRef = useRef(false)
-  const isVideoPlayingRef = useRef(false)
   const [isPlaying, setIsPlaying] = useState(false)
   const [isMuted, setIsMuted] = useState(false)
   const [wantsPlayback, setWantsPlayback] = useState(false)
   const [isStarting, setIsStarting] = useState(false)
   const [isReady, setIsReady] = useState(false)
   const [error, setError] = useState('')
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
 
   const attemptPlayback = useCallback(() => {
     const audio = audioRef.current
@@ -28,7 +26,7 @@ export default function useBackgroundMusic({ src }) {
       setError('Pemutar musik belum siap.')
       return
     }
-    if (isMutedRef.current || isVideoPlayingRef.current) return
+    if (isMutedRef.current) return
     if (!audio.paused || playPendingRef.current) return
     if (typeof document !== 'undefined' && document.visibilityState === 'hidden') return
 
@@ -64,7 +62,7 @@ export default function useBackgroundMusic({ src }) {
   const togglePlayback = useCallback(() => {
     if (
       wantsPlaybackRef.current &&
-      (isPlayingRef.current || isVideoPlayingRef.current || playPendingRef.current)
+      (isPlayingRef.current || playPendingRef.current)
     ) {
       wantsPlaybackRef.current = false
       setWantsPlayback(false)
@@ -97,22 +95,6 @@ export default function useBackgroundMusic({ src }) {
     }
   }, [attemptPlayback])
 
-  const handleVideoPlaybackStateChange = useCallback(({ isPlaying: videoPlaying }) => {
-    if (typeof videoPlaying !== 'boolean' || videoPlaying === isVideoPlayingRef.current) return
-
-    isVideoPlayingRef.current = videoPlaying
-    setIsVideoPlaying(videoPlaying)
-
-    if (videoPlaying) {
-      playRequestIdRef.current += 1
-      playPendingRef.current = false
-      setIsStarting(false)
-      audioRef.current?.pause()
-    } else if (wantsPlaybackRef.current && !isMutedRef.current) {
-      attemptPlayback()
-    }
-  }, [attemptPlayback])
-
   const handlePlaying = useCallback(() => {
     playPendingRef.current = false
     setIsStarting(false)
@@ -120,7 +102,7 @@ export default function useBackgroundMusic({ src }) {
     setIsPlaying(true)
     setError('')
 
-    if (isMutedRef.current || isVideoPlayingRef.current) audioRef.current?.pause()
+    if (isMutedRef.current) audioRef.current?.pause()
   }, [])
 
   const handlePause = useCallback(() => {
@@ -158,11 +140,9 @@ export default function useBackgroundMusic({ src }) {
     isStarting,
     isReady,
     error,
-    isVideoPlaying,
     startFromEnvelope,
     togglePlayback,
     toggleMute,
-    handleVideoPlaybackStateChange,
     handleCanPlay,
     handlePlaying,
     handlePause,

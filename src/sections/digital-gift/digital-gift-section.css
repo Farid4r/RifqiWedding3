@@ -45,8 +45,8 @@
 
 .digital-gift__accounts {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
 }
 
 .gift-account {
@@ -54,7 +54,7 @@
   min-width: 0;
   flex-direction: column;
   align-items: flex-start;
-  padding: clamp(1.25rem, 4vw, 2.25rem);
+  padding: clamp(0.6rem, 3vw, 2.25rem);
   border-top: 1px solid var(--accent-champagne);
   border-bottom: 1px solid var(--line-border);
   background: var(--surface-cream);
@@ -83,7 +83,7 @@
   margin: 1.25rem 0 1rem;
   color: var(--brand-burgundy);
   font-family: var(--family-body);
-  font-size: clamp(1.1rem, 4vw, 1.5rem);
+  font-size: clamp(0.875rem, 3.5vw, 1.5rem);
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.06em;
   line-height: 1.5;
@@ -136,8 +136,7 @@
   }
 
   .digital-gift__accounts {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(1.5rem, 4vw, 3.5rem);
+    gap: clamp(1rem, 3vw, 3.5rem);
   }
 }
 

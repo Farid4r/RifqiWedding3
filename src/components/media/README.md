@@ -1,8 +1,8 @@
 # Invitation media
 
-`WeddingVideoPlayer` accepts `onPlaybackStateChange({ isPlaying, isMuted,
-reason })`. The snapshot reports playback and mute state independently. A
-playing muted video still takes playback priority over background music.
+`WeddingVideoPlayer` and `BackgroundMusicPlayer` are independent media
+controls. Video playback does not pause, stop, or otherwise coordinate the
+background music.
 
 `BackgroundMusicPlayer` is presentation-only. The `useBackgroundMusic` hook,
 owned by `App`, owns the single audio element and playback intent. `EnvelopeCover`
@@ -13,7 +13,8 @@ The local track is configured in `src/data/assets.js`; whether music is enabled
 is configured in `src/data/invitation.js`. The audio element uses
 `preload="none"` and is not played until the envelope is opened. Playback errors
 are reported to the player, and browser tab visibility changes do not trigger
-automatic replay.
+automatic replay. The ceremony video starts muted and uses its own playback
+controls inside the video frame.
 
 The ceremony video remains on its configured Cloudinary source. It starts muted,
 loads after its Intersection Observer warm-up boundary, preserves its playback

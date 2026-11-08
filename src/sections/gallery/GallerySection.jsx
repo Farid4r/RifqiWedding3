@@ -10,7 +10,6 @@ export default function GallerySection({ onLightboxChange }) {
   const [tabActive, setTabActive] = useState(!document.hidden)
   const [coverIndex, setCoverIndex] = useState(0)
   const sectionRef = useRef(null)
-  const railRef = useRef(null)
   const coverGesture = useRef(null)
   const skipCoverClick = useRef(false)
   const reduceMotion = useReducedMotion()
@@ -100,17 +99,14 @@ export default function GallerySection({ onLightboxChange }) {
 
         {carouselImages.length > 0 && (
           <>
-            <p className="gallery-section__hint">Geser untuk melihat foto lainnya</p>
             <div
-              className="gallery-carousel"
-              ref={railRef}
+              className="gallery-grid"
               role="region"
-              aria-label="Carousel foto galeri"
-              tabIndex={0}
+              aria-label="Foto lainnya"
             >
               {carouselImages.map((image, index) => (
                 <button
-                  className="gallery-grid__item gallery-carousel__item"
+                  className="gallery-grid__item gallery-grid__small-item"
                   type="button"
                   key={image.src}
                   onClick={() => openLightbox(index + 1)}

@@ -4,16 +4,15 @@ import './background-music-player.css'
 
 export default function BackgroundMusicPlayer({ music }) {
   const statusId = useId()
-  const isAudiblyPlaying = music.isPlaying && !music.isMuted && !music.isVideoPlaying
+  const isAudiblyPlaying = music.isPlaying && !music.isMuted
   const playbackLabel = music.error
     ? 'Coba putar musik'
-    : isAudiblyPlaying || (music.wantsPlayback && music.isVideoPlaying)
+    : isAudiblyPlaying
       ? 'Jeda musik'
       : 'Putar musik'
 
   let status = 'Musik belum diputar.'
   if (music.error) status = music.error
-  else if (music.isVideoPlaying) status = 'Musik menunggu video akad selesai.'
   else if (music.isMuted) status = 'Musik dibisukan.'
   else if (music.isPlaying) status = 'Musik sedang diputar.'
   else if (music.isStarting) status = 'Menghubungkan ke musik…'

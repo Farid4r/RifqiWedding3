@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Pause, Play, Volume2, VolumeX } from 'lucide-react'
 import { useReducedMotion } from 'framer-motion'
 import { invitationAssets } from '../../data/assets.js'
@@ -12,10 +12,9 @@ function formatTime(seconds) {
   return `${minutes}:${String(remainingSeconds).padStart(2, '0')}`
 }
 
-export default function WeddingVideoPlayer({ onPlaybackStateChange }) {
+export default function WeddingVideoPlayer() {
   const playerRef = useRef(null)
   const videoRef = useRef(null)
-  const callbacksRef = useRef({ onPlaybackStateChange })
   const autoplayAttemptedRef = useRef(false)
   const [isNearViewport, setIsNearViewport] = useState(false)
   const [sourceReady, setSourceReady] = useState(false)
@@ -28,19 +27,6 @@ export default function WeddingVideoPlayer({ onPlaybackStateChange }) {
   const [touchControlsVisible, setTouchControlsVisible] = useState(false)
   const reduceMotion = useReducedMotion()
   const videoAsset = invitationAssets.loveStoryVideo
-
-  useEffect(() => {
-    callbacksRef.current = { onPlaybackStateChange }
-  }, [onPlaybackStateChange])
-
-  const reportPlaybackState = useCallback((video, reason) => {
-    if (!video) return
-    callbacksRef.current.onPlaybackStateChange?.({
-      isPlaying: !video.paused && !video.ended,
-      isMuted: video.muted,
-      reason,
-    })
-  }, [])
 
   useEffect(() => {
     const target = playerRef.current
@@ -90,12 +76,10 @@ export default function WeddingVideoPlayer({ onPlaybackStateChange }) {
         () => setHasError(false),
         () => {
           setPlayRequested(false)
-          reportPlaybackState(video, 'play-rejected')
         },
       )
     } catch {
       setPlayRequested(false)
-      reportPlaybackState(video, 'play-rejected')
     }
 
     return undefined
@@ -113,18 +97,15 @@ export default function WeddingVideoPlayer({ onPlaybackStateChange }) {
     if (video && video.readyState < HTMLMediaElement.HAVE_FUTURE_DATA && !video.muted) {
       video.muted = true
       setIsMuted(true)
-      reportPlaybackState(video, 'muted')
     }
 
     if (video && sourceReady && video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
       try {
         video.play()?.then(
           () => setHasError(false),
-          () => reportPlaybackState(video, 'play-rejected'),
         )
       } catch {
         setPlayRequested(false)
-        reportPlaybackState(video, 'play-rejected')
       }
       return
     }
@@ -157,7 +138,6 @@ export default function WeddingVideoPlayer({ onPlaybackStateChange }) {
     if (!video.muted) {
       video.muted = true
       setIsMuted(true)
-      reportPlaybackState(video, 'muted')
     }
     setHasError(false)
     setSourceReady(true)
@@ -206,27 +186,21 @@ export default function WeddingVideoPlayer({ onPlaybackStateChange }) {
           onPlay={(event) => {
             setIsPlaying(true)
             setPlayRequested(false)
-            reportPlaybackState(event.currentTarget, 'playing')
           }}
-          onPlaying={(event) => reportPlaybackState(event.currentTarget, 'playing')}
           onPause={(event) => {
             setIsPlaying(false)
-            reportPlaybackState(event.currentTarget, 'paused')
           }}
           onVolumeChange={(event) => {
             const muted = event.currentTarget.muted
             setIsMuted(muted)
-            reportPlaybackState(event.currentTarget, muted ? 'muted' : 'unmuted')
           }}
           onEnded={(event) => {
             setIsPlaying(false)
             setPlayRequested(false)
-            reportPlaybackState(event.currentTarget, 'ended')
           }}
           onError={(event) => {
             setHasError(true)
             setIsPlaying(false)
-            reportPlaybackState(event.currentTarget, 'error')
           }}
         >
           {sourceReady && <source src={videoAsset.src} type={videoAsset.type} />}
@@ -252,8 +226,6 @@ export default function WeddingVideoPlayer({ onPlaybackStateChange }) {
             </button>
           </div>
         )}
-      </div>
-
       <div
         className="wedding-video-player__controls"
         role="group"
@@ -303,6 +275,7 @@ export default function WeddingVideoPlayer({ onPlaybackStateChange }) {
             <Volume2 size={19} aria-hidden="true" />
           )}
         </button>
+      </div>
       </div>
     </div>
   )

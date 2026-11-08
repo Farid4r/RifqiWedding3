@@ -5,9 +5,15 @@
 }
 
 .wedding-video-player__controls {
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  bottom: 0;
+  left: 0;
   opacity: 0;
   pointer-events: none;
   transition: opacity 180ms ease;
+  background: rgb(245 239 232 / 96%);
 }
 
 .wedding-video-player:hover .wedding-video-player__controls,
@@ -19,6 +25,7 @@
 
 .wedding-video-player__screen {
   position: relative;
+  overflow: hidden;
   width: 100%;
   aspect-ratio: 16 / 9;
   background: #1a1113;

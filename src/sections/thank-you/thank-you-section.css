@@ -1,0 +1,55 @@
+.thank-you {
+  display: grid;
+  min-height: 24rem;
+  place-items: center;
+  padding: clamp(4rem, 10vw, 8rem) 1.25rem;
+  background: var(--surface-ivory);
+  color: var(--ink-muted);
+  text-align: center;
+}
+
+.thank-you__inner {
+  width: min(100%, var(--width-reading));
+  margin-inline: auto;
+}
+
+.thank-you__monogram {
+  margin: 0 0 1.25rem;
+  color: var(--brand-maroon);
+  font-family: var(--family-display);
+  font-size: clamp(1.125rem, 3vw, 1.5rem);
+  letter-spacing: 0.24em;
+}
+
+.thank-you h2 {
+  margin: 0;
+  color: var(--brand-burgundy);
+  font-family: var(--family-display);
+  font-size: var(--type-4xl);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+.thank-you__message {
+  max-width: 37rem;
+  margin: 1.5rem auto 0;
+  font-family: var(--family-body);
+  font-size: var(--type-base);
+  line-height: 1.85;
+  text-wrap: pretty;
+}
+
+.thank-you__couple {
+  margin: 1.5rem 0 0;
+  color: var(--brand-maroon);
+  font-family: var(--family-display);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-style: italic;
+}
+
+.thank-you__couple span { padding-inline: 0.25em; }
+
+@media (min-width: 48rem) {
+  .thank-you { min-height: 28rem; }
+}
