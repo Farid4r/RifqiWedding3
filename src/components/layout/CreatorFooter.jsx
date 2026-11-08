@@ -8,7 +8,9 @@ function validSocialUrl(value, platform) {
     const hostname = url.hostname.toLowerCase()
     const validHost = platform === 'instagram'
       ? hostname === 'instagram.com' || hostname.endsWith('.instagram.com')
-      : hostname === 'tiktok.com' || hostname.endsWith('.tiktok.com')
+      : platform === 'tiktok'
+        ? hostname === 'tiktok.com' || hostname.endsWith('.tiktok.com')
+        : hostname === 'wa.me'
     return url.protocol === 'https:' && validHost ? url.href : null
   } catch {
     return null
@@ -16,14 +18,10 @@ function validSocialUrl(value, platform) {
 }
 
 function getContactLinks() {
-  const phone = typeof creatorData.whatsapp === 'string'
-    ? creatorData.whatsapp.replace(/[^\d]/g, '')
-    : ''
   const links = []
 
-  if (/^[1-9]\d{7,14}$/.test(phone)) {
-    links.push({ label: 'WhatsApp', href: `https://wa.me/${phone}` })
-  }
+  const whatsapp = validSocialUrl(creatorData.whatsapp, 'whatsapp')
+  if (whatsapp) links.push({ label: 'WhatsApp', href: whatsapp })
 
   const instagram = validSocialUrl(creatorData.instagram, 'instagram')
   const tiktok = validSocialUrl(creatorData.tiktok, 'tiktok')
