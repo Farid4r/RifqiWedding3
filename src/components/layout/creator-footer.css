@@ -4,7 +4,7 @@
   display: grid;
   justify-items: center;
   gap: 0.85rem;
-  padding: 1.5rem 1rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
+  padding: 1.5rem 1rem calc(5.5rem + env(safe-area-inset-bottom, 0px));
   background: var(--surface-ivory);
   color: var(--ink-muted);
   text-align: center;
@@ -29,18 +29,36 @@
 
 .creator-footer__links a {
   display: inline-flex;
+  width: 2.75rem;
   min-height: 2.75rem;
   align-items: center;
-  padding-inline: 0.35rem;
+  justify-content: center;
+  border-radius: 50%;
   color: var(--ink-muted);
-  font-family: var(--family-body);
-  font-size: var(--type-sm);
   text-decoration: none;
   text-underline-offset: 0.2em;
 }
 
+.creator-footer__links svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.creator-footer__links .creator-footer__icon-dot {
+  fill: currentColor;
+  stroke: none;
+}
+
 .creator-footer__links a:hover { text-decoration: underline; }
-.creator-footer__links a:focus-visible { outline-color: var(--brand-maroon); }
+.creator-footer__links a:focus-visible {
+  outline: 2px solid var(--brand-maroon);
+  outline-offset: 2px;
+}
 
 .creator-footer__copyright {
   max-width: 100%;
