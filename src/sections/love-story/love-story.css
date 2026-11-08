@@ -1,7 +1,8 @@
 .love-story {
-  padding: clamp(4rem, 9vw, 8rem) 1.25rem clamp(4.5rem, 10vw, 9rem);
-  background: var(--surface-ivory);
-  color: var(--brand-burgundy);
+  padding: clamp(3.5rem, 7vw, 6rem) 1.25rem;
+  background-color: transparent;
+  background-image: none;
+  color: var(--surface-ivory);
 }
 
 .love-story__inner {
@@ -18,7 +19,7 @@
 
 .love-story__eyebrow {
   margin: 0 0 0.8rem;
-  color: var(--brand-maroon);
+  color: var(--accent-champagne);
   font-family: var(--family-body);
   font-size: 0.75rem;
   font-weight: 600;
@@ -40,7 +41,7 @@
 .love-story__narrative {
   max-width: 58ch;
   margin: 0;
-  color: var(--ink-muted);
+  color: rgb(245 239 232 / 84%);
   font-family: var(--family-body);
   font-size: 1rem;
   line-height: 1.85;

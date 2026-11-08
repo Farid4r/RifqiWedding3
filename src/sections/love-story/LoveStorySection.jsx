@@ -7,7 +7,7 @@ export default function LoveStorySection({ onPlaybackStateChange }) {
   const reduceMotion = useReducedMotion()
   const story = invitationData.sections.loveStory
   const revealTransition = {
-    duration: reduceMotion ? 0 : 0.45,
+    duration: reduceMotion ? 0 : 0.55,
     ease: [0.2, 0, 0, 1],
   }
 

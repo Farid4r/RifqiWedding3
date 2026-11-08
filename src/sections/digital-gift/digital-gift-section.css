@@ -1,6 +1,6 @@
 .digital-gift {
   padding: clamp(4rem, 9vw, 8rem) 1.25rem;
-  background: var(--surface-ivory);
+  background: transparent;
   color: var(--brand-burgundy);
 }
 

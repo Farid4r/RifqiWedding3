@@ -3,6 +3,7 @@ export const invitationData = {
     bride: {
       fullName: 'Natashya Zahra N., S.A.B.',
       preferredName: 'Natashya',
+      instagram: null,
       parents: {
         father: '(Alm.) Nurdin',
         mother: 'Yuli Mariana M., S.Pd.',
@@ -11,6 +12,7 @@ export const invitationData = {
     groom: {
       fullName: 'M. Rifqi Subakti, S.Ars.',
       preferredName: 'Rifqi',
+      instagram: null,
       parents: {
         father: 'H. Asep Bakti',
         mother: 'Hj. Titin Sumarni, S.Pdi.',

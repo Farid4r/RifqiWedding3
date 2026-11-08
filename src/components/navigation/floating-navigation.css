@@ -3,7 +3,19 @@ html {
 }
 
 .invitation-content {
+  position: relative;
+  z-index: 1;
   padding-bottom: calc(6.25rem + env(safe-area-inset-bottom, 0px));
+}
+
+.invitation-color-morph {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  pointer-events: none;
+  background-color: var(--morph-color, #F5EFE8);
+  background-image: radial-gradient(ellipse at 50% 0%, rgb(138 57 75 / 12%), transparent 68%);
+  will-change: background-color;
 }
 
 .floating-navigation-shell {
@@ -80,7 +92,11 @@ html {
 }
 
 .floating-navigation__desktop-links {
-  display: none;
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 0.125rem;
 }
 
 .floating-navigation__more-panel {
@@ -140,19 +156,6 @@ html {
 }
 
 @media (min-width: 52rem) {
-  .floating-navigation > .floating-navigation__link,
-  .floating-navigation-shell .floating-navigation__more-panel {
-    display: none;
-  }
-
-  .floating-navigation__desktop-links {
-    display: flex;
-    min-width: 0;
-    align-items: center;
-    justify-content: center;
-    gap: 0.125rem;
-  }
-
   .floating-navigation__desktop-links .floating-navigation__link {
     padding-inline: clamp(0.45rem, 0.8vw, 0.8rem);
     font-size: var(--type-xs);

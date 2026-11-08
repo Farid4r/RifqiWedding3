@@ -1,6 +1,6 @@
 .couple-profile-section {
   padding: clamp(3.5rem, 8vw, 7rem) 1.25rem clamp(4rem, 9vw, 8rem);
-  background: var(--surface-cream);
+  background: transparent;
   color: var(--brand-burgundy);
 }
 
@@ -52,6 +52,12 @@
   background: var(--surface-ivory);
 }
 
+@media (max-width: 39.999rem) {
+  .couple-profile__portrait {
+    width: min(88%, 27rem);
+  }
+}
+
 .couple-profile__portrait img {
   display: block;
   width: 100%;
@@ -83,6 +89,28 @@
   font-family: var(--family-body);
   font-size: 1rem;
   line-height: 1.75;
+}
+
+.couple-profile__instagram {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-top: 0.45rem;
+  color: var(--brand-maroon);
+  font-family: var(--family-body);
+  font-size: var(--type-sm);
+  text-decoration: none;
+  text-underline-offset: 0.2em;
+}
+
+.couple-profile__instagram:hover {
+  text-decoration: underline;
+}
+
+.couple-profile__instagram:focus-visible {
+  border-radius: var(--corner-control);
 }
 
 @media (min-width: 40rem) {

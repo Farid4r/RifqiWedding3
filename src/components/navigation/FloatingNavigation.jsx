@@ -1,27 +1,16 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   CalendarDays,
-  Gift,
-  HeartHandshake,
   Home,
-  Images,
   MessageCircle,
-  MoreHorizontal,
-  UserRound,
 } from 'lucide-react'
 import './floating-navigation.css'
 
 const NAV_ITEMS = [
   { id: 'home', label: 'Home', icon: Home },
-  { id: 'couple', label: 'Couple', icon: UserRound },
-  { id: 'story', label: 'Story', icon: HeartHandshake },
   { id: 'event', label: 'Event', icon: CalendarDays },
-  { id: 'gallery', label: 'Gallery', icon: Images },
   { id: 'rsvp', label: 'RSVP', icon: MessageCircle },
-  { id: 'gift', label: 'Gift', icon: Gift },
 ]
-
-const MOBILE_PRIMARY_IDS = new Set(['home', 'event'])
 
 function setIfChanged(setter, nextValue) {
   setter((currentValue) => currentValue === nextValue ? currentValue : nextValue)
@@ -29,18 +18,6 @@ function setIfChanged(setter, nextValue) {
 
 export default function FloatingNavigation({ visible = true, onMoreMenuChange }) {
   const [activeId, setActiveId] = useState('home')
-  const [isMoreOpen, setIsMoreOpen] = useState(false)
-  const moreButtonRef = useRef(null)
-  const mobileMoreItems = useMemo(
-    () => NAV_ITEMS.filter(({ id }) => !MOBILE_PRIMARY_IDS.has(id)),
-    [],
-  )
-  const activeOverflowItem = mobileMoreItems.find(({ id }) => id === activeId)
-
-  function updateMoreMenu(nextOpen) {
-    setIsMoreOpen(nextOpen)
-    onMoreMenuChange?.(nextOpen)
-  }
 
   useEffect(() => {
     if (!visible) return undefined
@@ -90,11 +67,11 @@ export default function FloatingNavigation({ visible = true, onMoreMenuChange })
     const handleScrollToEnd = () => {
       const atPageEnd =
         window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2
-      if (atPageEnd) setIfChanged(setActiveId, NAV_ITEMS[NAV_ITEMS.length - 1].id)
+      if (atPageEnd) setIfChanged(setActiveId, 'rsvp')
     }
     const handleResize = () => {
       activeAtViewport()
-      if (window.matchMedia('(min-width: 52rem)').matches) updateMoreMenu(false)
+      onMoreMenuChange?.(false)
     }
     window.addEventListener('scroll', handleScrollToEnd, { passive: true })
     window.addEventListener('resize', handleResize, { passive: true })
@@ -109,23 +86,6 @@ export default function FloatingNavigation({ visible = true, onMoreMenuChange })
     }
   }, [visible, onMoreMenuChange])
 
-  useEffect(() => {
-    if (!isMoreOpen) return undefined
-
-    function handleKeyDown(event) {
-      if (event.key !== 'Escape') return
-      updateMoreMenu(false)
-      moreButtonRef.current?.focus()
-    }
-
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [isMoreOpen, onMoreMenuChange])
-
-  useEffect(() => {
-    if (!visible) updateMoreMenu(false)
-  }, [visible, onMoreMenuChange])
-
   if (!visible) return null
 
   function renderLink({ id, label, icon: Icon }) {
@@ -136,7 +96,6 @@ export default function FloatingNavigation({ visible = true, onMoreMenuChange })
         href={`#${id}`}
         key={id}
         aria-current={isActive ? 'location' : undefined}
-        onClick={() => updateMoreMenu(false)}
       >
         <Icon size={17} strokeWidth={1.7} aria-hidden="true" />
         <span>{label}</span>
@@ -147,28 +106,8 @@ export default function FloatingNavigation({ visible = true, onMoreMenuChange })
   return (
     <div className="floating-navigation-shell">
       <nav className="floating-navigation" aria-label="Navigasi undangan">
-        {NAV_ITEMS.filter(({ id }) => MOBILE_PRIMARY_IDS.has(id)).map(renderLink)}
-        <button
-          ref={moreButtonRef}
-          className={`floating-navigation__link floating-navigation__more${isMoreOpen ? ' is-expanded' : ''}${activeOverflowItem ? ' has-active-overflow' : ''}`}
-          type="button"
-          aria-label={activeOverflowItem ? `Bagian aktif: ${activeOverflowItem.label}. Buka bagian lainnya` : 'Buka bagian lainnya'}
-          aria-expanded={isMoreOpen}
-          aria-current={activeOverflowItem ? 'location' : undefined}
-          onClick={() => updateMoreMenu(!isMoreOpen)}
-        >
-          <MoreHorizontal size={18} aria-hidden="true" />
-          <span>{activeOverflowItem?.label ?? 'More'}</span>
-        </button>
-        <div className="floating-navigation__desktop-links">
-          {NAV_ITEMS.map(renderLink)}
-        </div>
+        <div className="floating-navigation__desktop-links">{NAV_ITEMS.map(renderLink)}</div>
       </nav>
-      {isMoreOpen && (
-        <div className="floating-navigation__more-panel" role="group" aria-label="Bagian lainnya">
-          {mobileMoreItems.map(renderLink)}
-        </div>
-      )}
     </div>
   )
 }

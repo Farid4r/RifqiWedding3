@@ -58,6 +58,33 @@ function Profile({ entry, index, reduceMotion }) {
           {entry.relation} dari Bapak {entry.person.parents.father} dan Ibu{' '}
           {entry.person.parents.mother}.
         </p>
+        {entry.person.instagram?.username && entry.person.instagram?.url && (
+          <a
+            className="couple-profile__instagram"
+            href={entry.person.instagram.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Instagram ${entry.person.preferredName}, ${entry.person.instagram.username}`}
+          >
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.7"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="0.75" fill="currentColor" stroke="none" />
+            </svg>
+            <span>@{entry.person.instagram.username}</span>
+          </a>
+        )}
       </div>
     </motion.article>
   )
