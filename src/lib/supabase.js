@@ -40,7 +40,11 @@ function readSupabaseConfig() {
 
   const isLocalHost = ['localhost', '127.0.0.1'].includes(parsedUrl.hostname)
   if (!['https:', ...(isLocalHost ? ['http:'] : [])].includes(parsedUrl.protocol)) {
-    return { client: null, error: 'VITE_SUPABASE_URL harus menggunakan HTTPS.' }
+    return {
+      url: null,
+      publishableKey: null,
+      error: 'VITE_SUPABASE_URL harus menggunakan HTTPS.',
+    }
   }
 
   if (isPrivilegedKey(publishableKey)) {
@@ -55,17 +59,11 @@ function readSupabaseConfig() {
 }
 
 const configuration = readSupabaseConfig()
-let supabaseClientPromise
 
 export const supabaseConfigError = configuration.error
 export const isSupabaseConfigured = Boolean(configuration.url && configuration.publishableKey)
 
-export function getSupabaseClient() {
-  if (!isSupabaseConfigured) return Promise.resolve(null)
-
-  supabaseClientPromise ??= import('@supabase/supabase-js').then(({ createClient }) =>
-    createClient(configuration.url, configuration.publishableKey),
-  )
-
-  return supabaseClientPromise
+export function getSupabaseRestConfig() {
+  if (!isSupabaseConfigured) return null
+  return { url: configuration.url, publishableKey: configuration.publishableKey }
 }

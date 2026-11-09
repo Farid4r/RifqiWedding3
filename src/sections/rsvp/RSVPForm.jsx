@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react'
 import {
   createGuestbookEntry,
+  getGuestbookErrorDebugDetails,
+  getGuestbookErrorMessage,
   GUESTBOOK_ATTENDANCE_OPTIONS,
   GUESTBOOK_MESSAGE_MAX_LENGTH,
   GUESTBOOK_NAME_MAX_LENGTH,
@@ -35,8 +37,12 @@ export default function RSVPForm({ onCreated, isConfigured }) {
       setAttendance('')
       setMessage('')
       setFeedback({ type: 'success', text: 'Terima kasih. Konfirmasi dan ucapan Anda telah tersimpan.' })
-    } catch {
-      setFeedback({ type: 'error', text: 'Pesan belum berhasil dikirim. Periksa koneksi lalu coba lagi.' })
+    } catch (error) {
+      setFeedback({
+        type: 'error',
+        text: getGuestbookErrorMessage(error),
+        debug: getGuestbookErrorDebugDetails(error),
+      })
     } finally {
       submitLockRef.current = false
       setIsSubmitting(false)
